@@ -1,0 +1,19 @@
+{
+  "is_demo_data": false,
+  "data_notice": "Calculated Assessment Result (Submitted on 2026-08-28 10:31:19)",
+  "timestamp": "2026-08-28 10:31:19",
+  "readiness_index": 100.0,
+  "ransomware_risk_score": 0.0,
+  "risk_level": "Low",
+  "total_earned_points": 150,
+  "total_max_points": 150,
+  "category_scores": {
+    "Backup & Recovery": 100.0,
+    "Identity & Access": 100.0,
+    "Endpoint & Network Defense": 100.0,
+    "Awareness & Phishing": 100.0,
+    "Incident Response": 100.0
+  },
+  "top_vulnerabilities": [],
+  "recommendations": []
+}

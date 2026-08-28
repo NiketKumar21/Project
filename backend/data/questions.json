@@ -1,0 +1,152 @@
+[
+  {
+    "id": 1,
+    "category": "Backup & Recovery",
+    "question": "Does your organization maintain offline, immutable, or air-gapped backups?",
+    "options": [
+      { "text": "No backups or backups are constantly connected to the network", "points": 0 },
+      { "text": "Backups exist online with periodic manual offline copies", "points": 5 },
+      { "text": "Automated, air-gapped, and immutable backups are maintained regularly", "points": 10 }
+    ]
+  },
+  {
+    "id": 2,
+    "category": "Backup & Recovery",
+    "question": "How frequently are backup restoration drills conducted and verified?",
+    "options": [
+      { "text": "Restoration has never been tested", "points": 0 },
+      { "text": "Tested annually or after major infrastructure changes", "points": 5 },
+      { "text": "Tested quarterly with verified zero-data-loss recovery targets", "points": 10 }
+    ]
+  },
+  {
+    "id": 3,
+    "category": "Backup & Recovery",
+    "question": "Are critical business databases and system configurations included in automated backup schedules?",
+    "options": [
+      { "text": "Only basic files are backed up manually", "points": 0 },
+      { "text": "Most key systems backed up nightly", "points": 5 },
+      { "text": "Comprehensive automated continuous/hourly backups across all core systems", "points": 10 }
+    ]
+  },
+  {
+    "id": 4,
+    "category": "Identity & Access",
+    "question": "Is Multi-Factor Authentication (MFA) enforced for all employees, remote access, and administrative logins?",
+    "options": [
+      { "text": "MFA is not enforced or used only by IT admins", "points": 0 },
+      { "text": "Enforced for remote access (VPN/RDP) but optional internally", "points": 5 },
+      { "text": "Strictly enforced across all applications, email, VPNs, and administrative portals", "points": 10 }
+    ]
+  },
+  {
+    "id": 5,
+    "category": "Identity & Access",
+    "question": "How strictly is the Principle of Least Privilege applied to user accounts and administrative credentials?",
+    "options": [
+      { "text": "Many users have local admin rights or shared superuser accounts", "points": 0 },
+      { "text": "Admin rights restricted, but role-based permissions are audited rarely", "points": 5 },
+      { "text": "Strict role-based access control (RBAC) with Just-In-Time privileged access", "points": 10 }
+    ]
+  },
+  {
+    "id": 6,
+    "category": "Identity & Access",
+    "question": "How quickly are user access rights revoked when an employee leaves or changes roles?",
+    "options": [
+      { "text": "Deprovisioning is manual and often takes days or weeks", "points": 0 },
+      { "text": "Deprovisioned within 24 to 48 hours", "points": 5 },
+      { "text": "Automated immediate deprovisioning via central identity provider (IdP)", "points": 10 }
+    ]
+  },
+  {
+    "id": 7,
+    "category": "Endpoint & Network Defense",
+    "question": "Are Endpoint Detection and Response (EDR) or modern antivirus solutions deployed across all endpoints?",
+    "options": [
+      { "text": "Legacy antivirus or no centralized endpoint protection", "points": 0 },
+      { "text": "EDR deployed on servers but missing on some work-from-home laptops", "points": 5 },
+      { "text": "Centralized EDR with 24/7 telemetry deployed on 100% of endpoints", "points": 10 }
+    ]
+  },
+  {
+    "id": 8,
+    "category": "Endpoint & Network Defense",
+    "question": "What is your organization's patch management SLA for critical security vulnerabilities?",
+    "options": [
+      { "text": "Ad-hoc patching when downtime permits (often > 30 days)", "points": 0 },
+      { "text": "Critical patches applied within 14 days of release", "points": 5 },
+      { "text": "Automated patch deployment within 48 to 72 hours for critical vulnerabilities", "points": 10 }
+    ]
+  },
+  {
+    "id": 9,
+    "category": "Endpoint & Network Defense",
+    "question": "Is the internal network segmented to prevent lateral movement in case of a compromise?",
+    "options": [
+      { "text": "Flat network where any device can talk to any server", "points": 0 },
+      { "text": "Basic VLAN separation between guest Wi-Fi and corporate network", "points": 5 },
+      { "text": "Micro-segmentation and strict firewall rules between user workstations and critical servers", "points": 10 }
+    ]
+  },
+  {
+    "id": 10,
+    "category": "Awareness & Phishing",
+    "question": "How often are employees trained on cybersecurity threats and ransomware tactics?",
+    "options": [
+      { "text": "No formal cybersecurity training provided", "points": 0 },
+      { "text": "Annual compliance video training for new hires", "points": 5 },
+      { "text": "Regular quarterly interactive training with continuous security updates", "points": 10 }
+    ]
+  },
+  {
+    "id": 11,
+    "category": "Awareness & Phishing",
+    "question": "Are simulated phishing exercises conducted to test employee awareness?",
+    "options": [
+      { "text": "No phishing simulations conducted", "points": 0 },
+      { "text": "Occasional annual phishing test without follow-up guidance", "points": 5 },
+      { "text": "Monthly simulated phishing drills with targeted re-education for repeat clickers", "points": 10 }
+    ]
+  },
+  {
+    "id": 12,
+    "category": "Awareness & Phishing",
+    "question": "Is there a simple one-click reporting mechanism for suspicious emails?",
+    "options": [
+      { "text": "Employees must manually forward emails to IT (rarely done)", "points": 0 },
+      { "text": "Reporting process exists but lacks automated triage", "points": 5 },
+      { "text": "One-click 'Report Phish' button integrated into email client with automated analysis", "points": 10 }
+    ]
+  },
+  {
+    "id": 13,
+    "category": "Incident Response",
+    "question": "Does your organization have a documented and tested Ransomware Incident Response Playbook?",
+    "options": [
+      { "text": "No formal incident response plan exists", "points": 0 },
+      { "text": "Documented plan exists on paper but has never been exercised", "points": 5 },
+      { "text": "Detailed ransomware playbook tested bi-annually via executive tabletop exercises", "points": 10 }
+    ]
+  },
+  {
+    "id": 14,
+    "category": "Incident Response",
+    "question": "Are critical contact channels (CERT, legal, forensic experts, insurance) pre-established?",
+    "options": [
+      { "text": "No external retainers or contact protocols established", "points": 0 },
+      { "text": "Basic contact list available in internal directory", "points": 5 },
+      { "text": "Pre-negotiated incident response retainers and out-of-band communication channels active", "points": 10 }
+    ]
+  },
+  {
+    "id": 15,
+    "category": "Incident Response",
+    "question": "Are system logs centralized and monitored for anomalous behavior?",
+    "options": [
+      { "text": "Logs are stored locally on servers without active review", "points": 0 },
+      { "text": "Centralized log repository checked daily during business hours", "points": 5 },
+      { "text": "24/7 SIEM/SOC monitoring with automated alerts for suspicious lateral movement", "points": 10 }
+    ]
+  }
+]

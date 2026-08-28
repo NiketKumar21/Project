@@ -1,0 +1,160 @@
+/* ==========================================================================
+   What-If Simulation Sandbox Styles (Screen 3)
+   ========================================================================== */
+
+.simulation-header {
+  margin-bottom: 2rem;
+}
+
+.simulation-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+}
+
+.simulation-subtitle {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.simulation-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .simulation-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.scenario-selector {
+  margin-bottom: 1.5rem;
+}
+
+.scenario-select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: #0f172a;
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.controls-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.control-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem;
+  background-color: rgba(15, 23, 42, 0.6);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+
+.control-item:hover {
+  border-color: var(--primary-teal);
+}
+
+.control-checkbox {
+  accent-color: var(--primary-teal);
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  cursor: pointer;
+}
+
+.control-details {
+  flex: 1;
+}
+
+.control-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.control-meta {
+  font-size: 0.75rem;
+  color: var(--primary-teal-hover);
+  font-weight: 600;
+}
+
+/* Simulation Results Panel */
+.comparison-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.comparison-card {
+  background-color: #0f172a;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.comparison-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.comparison-value {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-top: 0.25rem;
+}
+
+.impact-demo-box {
+  background-color: rgba(59, 130, 246, 0.1);
+  border: 1px dashed var(--accent-blue);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.impact-demo-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--accent-blue);
+  font-weight: 700;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.remediation-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.remediation-list li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.88rem;
+  color: var(--text-main);
+}
+
+.remediation-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--primary-teal);
+  font-weight: 700;
+}

@@ -1,0 +1,94 @@
+/* ==========================================================================
+   Assessment Page Styles (Screen 2)
+   ========================================================================== */
+
+.assessment-header {
+  margin-bottom: 2rem;
+}
+
+.assessment-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+}
+
+.assessment-instructions {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  max-width: 800px;
+}
+
+.category-block {
+  margin-bottom: 2rem;
+}
+
+.category-block-header {
+  background-color: #1e293b;
+  border: 1px solid var(--border-color);
+  border-radius: 8px 8px 0 0;
+  padding: 1rem 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.category-block-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary-teal-hover);
+}
+
+.question-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-top: none;
+  padding: 1.25rem;
+}
+
+.question-card:last-child {
+  border-radius: 0 0 8px 8px;
+}
+
+.question-text {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.85rem;
+  color: var(--text-main);
+}
+
+.options-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.option-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background-color: rgba(15, 23, 42, 0.5);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  font-size: 0.88rem;
+}
+
+.option-label:hover {
+  background-color: var(--bg-surface-hover);
+  border-color: var(--primary-teal);
+}
+
+.option-input {
+  accent-color: var(--primary-teal);
+  width: 18px;
+  height: 18px;
+}
+
+.submit-container {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: flex-end;
+}

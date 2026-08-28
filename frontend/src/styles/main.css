@@ -1,0 +1,259 @@
+/* ==========================================================================
+   SIH1452 - Modern Plain CSS Design System
+   Color Palette: Sleek Dark Cyber-Security Theme (Navy/Teal/Crimson)
+   ========================================================================== */
+
+:root {
+  --font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  /* Color Tokens */
+  --bg-primary: #0f172a;       /* Dark slate background */
+  --bg-surface: #1e293b;       /* Card background */
+  --bg-surface-hover: #334155; /* Hover card background */
+  
+  --text-main: #f8fafc;        /* Off-white primary text */
+  --text-muted: #94a3b8;       /* Slate muted text */
+  --text-dim: #64748b;         /* Dim label text */
+  
+  --primary-teal: #0d9488;     /* Core teal accent */
+  --primary-teal-hover: #14b8a6;
+  --accent-blue: #3b82f6;      /* Vibrant blue */
+  
+  /* Risk Severity Colors */
+  --risk-low: #10b981;         /* Green */
+  --risk-moderate: #f59e0b;    /* Amber / Yellow */
+  --risk-high: #ef4444;        /* Red / Crimson */
+  
+  /* Borders & Shadows */
+  --border-color: #334155;
+  --border-radius: 12px;
+  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  
+  /* Transitions */
+  --transition-fast: 0.2s ease-in-out;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* App Container */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* Navigation Header */
+.navbar {
+  background-color: var(--bg-surface);
+  border-bottom: 1px solid var(--border-color);
+  padding: 1rem 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.navbar-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.nav-icon {
+  font-size: 1.75rem;
+}
+
+.nav-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+}
+
+.nav-subtitle {
+  font-size: 0.75rem;
+  color: var(--primary-teal-hover);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.nav-links {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.nav-button {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid transparent;
+  padding: 0.6rem 1.1rem;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.nav-button:hover {
+  color: var(--text-main);
+  background-color: var(--bg-surface-hover);
+}
+
+.nav-button.active {
+  color: #ffffff;
+  background-color: var(--primary-teal);
+  font-weight: 600;
+}
+
+/* DEMO Data Banner */
+.demo-banner {
+  background-color: rgba(245, 158, 11, 0.15);
+  border: 1px solid var(--risk-moderate);
+  border-radius: var(--border-radius);
+  padding: 0.85rem 1.25rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #fef08a;
+  font-size: 0.9rem;
+}
+
+.demo-banner-icon {
+  font-size: 1.2rem;
+}
+
+.demo-banner-tag {
+  background-color: var(--risk-moderate);
+  color: #000;
+  font-weight: 700;
+  font-size: 0.7rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Common Card Styles */
+.card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Badges */
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-low {
+  background-color: rgba(16, 185, 129, 0.2);
+  color: var(--risk-low);
+  border: 1px solid var(--risk-low);
+}
+
+.badge-moderate {
+  background-color: rgba(245, 158, 11, 0.2);
+  color: var(--risk-moderate);
+  border: 1px solid var(--risk-moderate);
+}
+
+.badge-high {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: var(--risk-high);
+  border: 1px solid var(--risk-high);
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--primary-teal);
+  color: #ffffff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-teal-hover);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.btn-secondary:hover {
+  background-color: var(--bg-surface-hover);
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  border-top: 1px solid var(--border-color);
+  margin-top: 3rem;
+}
