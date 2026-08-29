@@ -1,19 +1,37 @@
 {
-  "is_demo_data": false,
-  "data_notice": "Calculated Assessment Result (Submitted on 2026-08-28 10:31:19)",
-  "timestamp": "2026-08-28 10:31:19",
-  "readiness_index": 100.0,
-  "ransomware_risk_score": 0.0,
-  "risk_level": "Low",
-  "total_earned_points": 150,
+  "is_demo_data": true,
+  "data_notice": "DEMO / INITIAL SAMPLE DATA \u2014 Complete an assessment to calculate your organization's actual risk score.",
+  "timestamp": "2026-08-28T00:00:00Z",
+  "readiness_index": 48.0,
+  "ransomware_risk_score": 52.0,
+  "risk_level": "Moderate",
+  "total_earned_points": 72,
   "total_max_points": 150,
   "category_scores": {
-    "Backup & Recovery": 100.0,
-    "Identity & Access": 100.0,
-    "Endpoint & Network Defense": 100.0,
-    "Awareness & Phishing": 100.0,
-    "Incident Response": 100.0
+    "Backup & Recovery": 50.0,
+    "Identity & Access": 40.0,
+    "Endpoint & Network Defense": 50.0,
+    "Awareness & Phishing": 60.0,
+    "Incident Response": 43.3
   },
-  "top_vulnerabilities": [],
-  "recommendations": []
+  "top_vulnerabilities": [
+    {
+      "category": "Identity & Access",
+      "question": "Is Multi-Factor Authentication (MFA) enforced for all employees, remote access, and administrative logins?",
+      "score_text": "Not enforced or optional for internal systems",
+      "severity": "High"
+    },
+    {
+      "category": "Incident Response",
+      "question": "Does your organization have a documented and tested Ransomware Incident Response Playbook?",
+      "score_text": "Documented on paper but never tested via tabletop exercises",
+      "severity": "High"
+    },
+    {
+      "category": "Backup & Recovery",
+      "question": "Does your organization maintain offline, immutable, or air-gapped backups?",
+      "score_text": "Backups exist online with periodic manual copies",
+      "severity": "Medium"
+    }
+  ]
 }

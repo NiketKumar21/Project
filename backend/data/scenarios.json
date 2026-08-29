@@ -1,116 +1,272 @@
 [
   {
-    "id": "scenario-1",
-    "name": "Phishing Email & Credential Harvest Attack",
-    "description": "A simulated threat actor sends spear-phishing emails containing malicious attachments or credential harvesting links to corporate staff.",
-    "attack_vector": "Email / Phishing",
-    "risk_drivers": ["Awareness & Phishing", "Identity & Access"],
-    "controls": [
+    "id": "sim-mfa",
+    "scenario_name": "Multi-Factor Authentication (MFA) Disabled",
+    "security_control_affected": "Multi-Factor Authentication (MFA) Enforcement",
+    "affected_category": "Identity & Access",
+    "category_penalty_pts": 30.0,
+    "description": "Simulates an operational environment where single-factor password authentication is used without secondary verification.",
+    "conceptual_attack_path": [
       {
-        "id": "ctrl-mfa",
-        "name": "Enforce Multi-Factor Authentication (MFA) across all accounts",
-        "category": "Identity & Access",
-        "impact_points": 18,
-        "downtime_reduction_hours": 36,
-        "cost_savings_demo": "$45,000 SIMULATED SAVINGS"
+        "stage": "1. Initial Access",
+        "title": "Email / Web Communication",
+        "description": "User encounters a simulated deceptive communication or phishing link."
       },
       {
-        "id": "ctrl-phish-drill",
-        "name": "Monthly Phishing Simulations & Employee Security Drills",
-        "category": "Awareness & Phishing",
-        "impact_points": 14,
-        "downtime_reduction_hours": 24,
-        "cost_savings_demo": "$25,000 SIMULATED SAVINGS"
+        "stage": "2. Account Compromise",
+        "title": "Single-Factor Credential Access",
+        "description": "Account credentials are exposed without secondary MFA protection."
       },
       {
-        "id": "ctrl-mail-filter",
-        "name": "Deploy One-Click Phishing Report Button & Automated Email Triage",
-        "category": "Awareness & Phishing",
-        "impact_points": 10,
-        "downtime_reduction_hours": 12,
-        "cost_savings_demo": "$15,000 SIMULATED SAVINGS"
+        "stage": "3. Lateral Movement",
+        "title": "Internal System Navigation",
+        "description": "Exposed account permissions allow access to internal corporate services."
+      },
+      {
+        "stage": "4. Data Encryption Risk",
+        "title": "Potential Data Availability Loss",
+        "description": "System access exposes operational data stores to potential availability risks."
+      },
+      {
+        "stage": "5. Business Impact",
+        "title": "Operational Interruption",
+        "description": "Account lockout and potential disruption to user business activities."
       }
     ],
-    "remediation": [
-      "Mandate FIDO2/Hardware MFA or Authenticator App push notifications for all users.",
-      "Conduct targeted awareness re-training for employees failing phishing drills.",
-      "Implement DMARC, DKIM, and SPF policies to block spoofed email domains."
+    "simulated_business_impact": {
+      "downtime_hours": 36,
+      "financial_impact_demo": "$45,000 SIMULATED LOSS",
+      "risk_exposure_rating": "High Identity Exposure"
+    },
+    "recommended_remediation": [
+      "Mandate FIDO2/Hardware MFA or Authenticator App push notifications across all user accounts.",
+      "Enforce step-up authentication for access to sensitive financial and operational portals.",
+      "Disable legacy password-only authentication protocols across the organization."
     ]
   },
   {
-    "id": "scenario-2",
-    "name": "Unpatched Remote Desktop (RDP) Exploitation",
-    "description": "A simulated threat actor scans public internet IP ranges for exposed, unpatched RDP ports and attempts automated brute-force access.",
-    "attack_vector": "External Exposure / Unpatched Systems",
-    "risk_drivers": ["Endpoint & Network Defense", "Identity & Access"],
-    "controls": [
+    "id": "sim-backups",
+    "scenario_name": "Backups Unavailable / Online Only",
+    "security_control_affected": "Offline Immutable & Air-Gapped Backups",
+    "affected_category": "Backup & Recovery",
+    "category_penalty_pts": 35.0,
+    "description": "Simulates a scenario where backups are maintained online without air-gapping or immutable write locks.",
+    "conceptual_attack_path": [
       {
-        "id": "ctrl-patch-sla",
-        "name": "Enforce 48-Hour Patch Management SLA for Critical Vulnerabilities",
-        "category": "Endpoint & Network Defense",
-        "impact_points": 20,
-        "downtime_reduction_hours": 48,
-        "cost_savings_demo": "$60,000 SIMULATED SAVINGS"
+        "stage": "1. Initial Access",
+        "title": "Initial System Entry",
+        "description": "A simulated perimeter vulnerability permits initial system entry."
       },
       {
-        "id": "ctrl-net-seg",
-        "name": "Micro-segment RDP Access behind Zero Trust / VPN with MFA",
-        "category": "Identity & Access",
-        "impact_points": 16,
-        "downtime_reduction_hours": 30,
-        "cost_savings_demo": "$40,000 SIMULATED SAVINGS"
+        "stage": "2. Account Compromise",
+        "title": "Administrative Permission Exposure",
+        "description": "Local administrative accounts are accessed without privilege boundary controls."
       },
       {
-        "id": "ctrl-edr-deploy",
-        "name": "Deploy Centralized EDR Telemetry & Behavioral Threat Detection",
-        "category": "Endpoint & Network Defense",
-        "impact_points": 12,
-        "downtime_reduction_hours": 18,
-        "cost_savings_demo": "$20,000 SIMULATED SAVINGS"
+        "stage": "3. Lateral Movement",
+        "title": "Storage Network Access",
+        "description": "Network access extends to online backup repositories."
+      },
+      {
+        "stage": "4. Data Encryption Risk",
+        "title": "Backup & Primary Data Lock Risk",
+        "description": "Online backups and primary file stores face simultaneous data availability risk."
+      },
+      {
+        "stage": "5. Business Impact",
+        "title": "Severe Operational Shutdown",
+        "description": "Prolonged business downtime due to lack of uncompromised recovery points."
       }
     ],
-    "remediation": [
-      "Disable direct internet-facing RDP ports and mandate Zero Trust Network Access (ZTNA).",
-      "Automate vulnerability scanning and patch critical CVEs within 48 hours.",
-      "Isolate server management networks from general workstation subnets."
+    "simulated_business_impact": {
+      "downtime_hours": 96,
+      "financial_impact_demo": "$120,000 SIMULATED LOSS",
+      "risk_exposure_rating": "Critical Data Recovery Exposure"
+    },
+    "recommended_remediation": [
+      "Maintain air-gapped, offline, or immutable backups following the 3-2-1 backup strategy.",
+      "Implement write-once-read-many (WORM) storage policies for core system backups.",
+      "Conduct quarterly backup restoration drills to verify recovery point and time objectives."
     ]
   },
   {
-    "id": "scenario-3",
-    "name": "Double Extortion Ransomware via Lateral Movement",
-    "description": "A simulated adversary gains initial foothold and attempts to exfiltrate sensitive data while seeking domain admin credentials.",
-    "attack_vector": "Credential Abuse / Privilege Escalation",
-    "risk_drivers": ["Backup & Recovery", "Incident Response"],
-    "controls": [
+    "id": "sim-edr",
+    "scenario_name": "Endpoint Protection & EDR Disabled",
+    "security_control_affected": "Endpoint Detection & Response (EDR) Telemetry",
+    "affected_category": "Endpoint & Network Defense",
+    "category_penalty_pts": 25.0,
+    "description": "Simulates endpoints lacking centralized behavioral monitoring or EDR agent telemetry.",
+    "conceptual_attack_path": [
       {
-        "id": "ctrl-airgap-backup",
-        "name": "Air-gap & Immutable Offline Backups with Immutable Storage Locks",
-        "category": "Backup & Recovery",
-        "impact_points": 22,
-        "downtime_reduction_hours": 72,
-        "cost_savings_demo": "$90,000 SIMULATED SAVINGS"
+        "stage": "1. Initial Access",
+        "title": "Untrusted Binary Execution",
+        "description": "An untrusted executable file is launched on an unmonitored workstation."
       },
       {
-        "id": "ctrl-ir-playbook",
-        "name": "Activated Incident Response Playbook & Pre-retained Forensic Experts",
-        "category": "Incident Response",
-        "impact_points": 15,
-        "downtime_reduction_hours": 24,
-        "cost_savings_demo": "$35,000 SIMULATED SAVINGS"
+        "stage": "2. Account Compromise",
+        "title": "Local User Rights Abuse",
+        "description": "Local user privileges are utilized without endpoint behavioral alerts."
       },
       {
-        "id": "ctrl-siem-soc",
-        "name": "Centralized 24/7 SIEM/SOC Monitoring & Immediate Isolation Triggers",
-        "category": "Incident Response",
-        "impact_points": 15,
-        "downtime_reduction_hours": 20,
-        "cost_savings_demo": "$30,000 SIMULATED SAVINGS"
+        "stage": "3. Lateral Movement",
+        "title": "Unmonitored Workstation Surfing",
+        "description": "Absence of EDR alerts allows undetected navigation between adjacent workstations."
+      },
+      {
+        "stage": "4. Data Encryption Risk",
+        "title": "Unchecked Mass Encryption Risk",
+        "description": "Process execution continues without automated endpoint isolation triggers."
+      },
+      {
+        "stage": "5. Business Impact",
+        "title": "Multi-Endpoint Operational Impact",
+        "description": "Multiple staff endpoints require manual forensic clean-up and re-imaging."
       }
     ],
-    "remediation": [
-      "Ensure offline backup copies are physically or logically separated from Active Directory domain.",
-      "Conduct quarterly ransomware incident response tabletop exercises with executive leadership.",
-      "Implement Privileged Access Management (PAM) with temporary Just-In-Time session limits."
+    "simulated_business_impact": {
+      "downtime_hours": 48,
+      "financial_impact_demo": "$55,000 SIMULATED LOSS",
+      "risk_exposure_rating": "High Endpoint Visibility Exposure"
+    },
+    "recommended_remediation": [
+      "Deploy centralized EDR agents with 24/7 telemetry across 100% of corporate endpoints.",
+      "Enable automated device isolation rules for suspicious process behaviors.",
+      "Audit endpoint coverage weekly to ensure no newly provisioned devices lack EDR protection."
+    ]
+  },
+  {
+    "id": "sim-patching",
+    "scenario_name": "Critical Security Systems Not Patched",
+    "security_control_affected": "48-Hour Critical Vulnerability Patch SLA",
+    "affected_category": "Endpoint & Network Defense",
+    "category_penalty_pts": 25.0,
+    "description": "Simulates delayed patch management where known critical CVEs remain unpatched past 30 days.",
+    "conceptual_attack_path": [
+      {
+        "stage": "1. Initial Access",
+        "title": "Exposed Public Port Scanning",
+        "description": "Simulated internet scans identify an unpatched public-facing service."
+      },
+      {
+        "stage": "2. Account Compromise",
+        "title": "Public Service Privilege Access",
+        "description": "Known software vulnerabilities allow unauthorized service privilege access."
+      },
+      {
+        "stage": "3. Lateral Movement",
+        "title": "Internal Infrastructure Entry",
+        "description": "Compromised service grants initial foothold into internal network segments."
+      },
+      {
+        "stage": "4. Data Encryption Risk",
+        "title": "System Service Encryption Risk",
+        "description": "Internal server infrastructure faces potential software encryption risks."
+      },
+      {
+        "stage": "5. Business Impact",
+        "title": "External Service Interruption",
+        "description": "Customer-facing web applications and internal portals experience downtime."
+      }
+    ],
+    "simulated_business_impact": {
+      "downtime_hours": 40,
+      "financial_impact_demo": "$50,000 SIMULATED LOSS",
+      "risk_exposure_rating": "High Vulnerability Exposure"
+    },
+    "recommended_remediation": [
+      "Enforce a strict 48-to-72-hour patch management SLA for critical security vulnerabilities.",
+      "Implement automated vulnerability scanning across all public IP addresses and internal subnets.",
+      "Decommission or isolate legacy operating systems unable to receive vendor security updates."
+    ]
+  },
+  {
+    "id": "sim-privileges",
+    "scenario_name": "Excessive User & Admin Privileges",
+    "security_control_affected": "Principle of Least Privilege & PAM Controls",
+    "affected_category": "Identity & Access",
+    "category_penalty_pts": 20.0,
+    "description": "Simulates standard user accounts operating with permanent local administrative rights.",
+    "conceptual_attack_path": [
+      {
+        "stage": "1. Initial Access",
+        "title": "Standard User Session Entry",
+        "description": "A standard employee workstation session is established."
+      },
+      {
+        "stage": "2. Account Compromise",
+        "title": "Immediate Admin Right Access",
+        "description": "User account possesses broad local administrator rights without escalation checks."
+      },
+      {
+        "stage": "3. Lateral Movement",
+        "title": "Broad Domain Privilege Expansion",
+        "description": "Over-privileged credentials permit unrestricted access across administrative shares."
+      },
+      {
+        "stage": "4. Data Encryption Risk",
+        "title": "Domain-Wide Availability Risk",
+        "description": "Administrative authority increases potential scope of data encryption risks."
+      },
+      {
+        "stage": "5. Business Impact",
+        "title": "Domain-Level Operational Outage",
+        "description": "Broad domain permissions escalate operational outage severity."
+      }
+    ],
+    "simulated_business_impact": {
+      "downtime_hours": 60,
+      "financial_impact_demo": "$75,000 SIMULATED LOSS",
+      "risk_exposure_rating": "High Privilege Exposure"
+    },
+    "recommended_remediation": [
+      "Remove permanent local admin rights from standard employee laptops and workstations.",
+      "Implement Privileged Access Management (PAM) with temporary Just-In-Time approval workflows.",
+      "Audit active directory group memberships monthly to enforce strict role-based access control."
+    ]
+  },
+  {
+    "id": "sim-awareness",
+    "scenario_name": "No Security Awareness & Phishing Training",
+    "security_control_affected": "Employee Security Awareness & Phishing Drills",
+    "affected_category": "Awareness & Phishing",
+    "category_penalty_pts": 20.0,
+    "description": "Simulates workforce lacking regular cybersecurity training or phishing awareness drills.",
+    "conceptual_attack_path": [
+      {
+        "stage": "1. Initial Access",
+        "title": "Social Engineering Interaction",
+        "description": "An employee receives a simulated social engineering or deceptive message."
+      },
+      {
+        "stage": "2. Account Compromise",
+        "title": "Unintentional Information Sharing",
+        "description": "Lack of training results in unintentional sharing of corporate login details."
+      },
+      {
+        "stage": "3. Lateral Movement",
+        "title": "Internal Communication Abuse",
+        "description": "Compromised employee email account sends internal deceptive messages to peers."
+      },
+      {
+        "stage": "4. Data Encryption Risk",
+        "title": "Unreported Threat Activity",
+        "description": "Threat activity goes unreported due to lack of security reporting awareness."
+      },
+      {
+        "stage": "5. Business Impact",
+        "title": "Organization-Wide Email Distrust",
+        "description": "Loss of email communication trust and productivity disruption."
+      }
+    ],
+    "simulated_business_impact": {
+      "downtime_hours": 24,
+      "financial_impact_demo": "$30,000 SIMULATED LOSS",
+      "risk_exposure_rating": "High Human Factor Exposure"
+    },
+    "recommended_remediation": [
+      "Conduct mandatory quarterly security awareness training for all organizational staff.",
+      "Execute monthly simulated phishing drills with immediate feedback for repeat clickers.",
+      "Deploy a one-click phishing report button in email clients to encourage active threat reporting."
     ]
   }
 ]

@@ -6,11 +6,20 @@ import VulnerabilityList from '../components/VulnerabilityList';
 import { resetAssessment } from '../services/api';
 import '../styles/dashboard.css';
 
-export default function Dashboard({ assessmentData, setAssessmentData, setActiveScreen }) {
+export default function Dashboard({ assessmentData, setAssessmentData, setActiveScreen, loadingInitial }) {
+  if (loadingInitial && !assessmentData) {
+    return (
+      <div className="card" style={{ textAlign: 'center', padding: '3rem' }}>
+        <p style={{ color: 'var(--cyan-bright)', fontWeight: 700 }}>⏳ Loading Security Assessment Posture...</p>
+      </div>
+    );
+  }
+
   if (!assessmentData) {
     return (
-      <div style={{ textAlign: 'center', padding: '3rem' }}>
-        <p>Loading assessment data...</p>
+      <div className="card" style={{ textAlign: 'center', padding: '3rem' }}>
+        <h3 style={{ color: 'var(--risk-high)', marginBottom: '0.5rem' }}>⚠️ Dashboard Data Unavailable</h3>
+        <p style={{ color: 'var(--text-muted)' }}>Backend scoring service is disconnected. Please start the Python backend server.</p>
       </div>
     );
   }
@@ -30,6 +39,14 @@ export default function Dashboard({ assessmentData, setAssessmentData, setActive
     }
   };
 
+  const readinessVal = Math.round(assessmentData.readiness_index || 0);
+
+  // SVG Gauge Math for Readiness Index Dial
+  const radius = 60;
+  const strokeWidth = 10;
+  const circumference = 2 * Math.PI * radius;
+  const strokeDashoffset = circumference - (readinessVal / 100) * circumference;
+
   return (
     <div className="dashboard-container">
       {/* Banner: Demo Data vs Actual Assessment Result */}
@@ -39,7 +56,7 @@ export default function Dashboard({ assessmentData, setAssessmentData, setActive
           <span className="demo-banner-icon">ℹ️</span>
           <span>
             {assessmentData.data_notice ||
-              "Currently displaying sample baseline data. Complete the assessment to compute your actual risk score."}
+              "Currently displaying sample baseline data. Complete the assessment to compute your organization's actual risk score."}
           </span>
         </div>
       ) : (
@@ -66,7 +83,7 @@ export default function Dashboard({ assessmentData, setAssessmentData, setActive
         <div>
           <h1 className="dashboard-title">Ransomware Risk & Readiness Posture</h1>
           <p className="dashboard-subtitle">
-            Executive Security Overview & Centralized Deterministic Scoring Overview
+            Executive Security Monitoring & Centralized Deterministic Scoring Overview
           </p>
         </div>
         <div className="dashboard-actions">
@@ -85,7 +102,7 @@ export default function Dashboard({ assessmentData, setAssessmentData, setActive
         </div>
       </div>
 
-      {/* Top Metrics Row */}
+      {/* Top Dual Metrics Row - Equal Height Gauge Cards */}
       <div className="metrics-row">
         <ScoreGauge 
           score={assessmentData.ransomware_risk_score} 
@@ -94,10 +111,53 @@ export default function Dashboard({ assessmentData, setAssessmentData, setActive
 
         <div className="card metric-card">
           <div className="metric-label">Readiness Index</div>
-          <div className="metric-value-huge" style={{ color: 'var(--primary-teal-hover)' }}>
-            {Math.round(assessmentData.readiness_index)}%
+          
+          {/* Circular SVG Dial for Readiness Index */}
+          <div style={{ position: 'relative', width: '160px', height: '160px', margin: '0.75rem auto' }}>
+            <svg width="160" height="160" viewBox="0 0 140 140" style={{ transform: 'rotate(-90deg)' }}>
+              <circle
+                cx="70"
+                cy="70"
+                r={radius}
+                stroke="rgba(255, 255, 255, 0.08)"
+                strokeWidth={strokeWidth}
+                fill="transparent"
+              />
+              <circle
+                cx="70"
+                cy="70"
+                r={radius}
+                stroke="var(--cyan-primary)"
+                strokeWidth={strokeWidth}
+                fill="transparent"
+                strokeDasharray={circumference}
+                strokeDashoffset={strokeDashoffset}
+                strokeLinecap="round"
+                style={{ transition: 'stroke-dashoffset 1s ease-out' }}
+              />
+            </svg>
+
+            <div style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}>
+              <span className="metric-value-huge" style={{ color: 'var(--cyan-bright)', margin: 0, fontSize: '3rem' }}>
+                {readinessVal}%
+              </span>
+              <span style={{ fontSize: '0.7rem', color: 'var(--text-dim)', fontWeight: 700, textTransform: 'uppercase' }}>
+                DEFENSIVE SCORE
+              </span>
+            </div>
           </div>
-          <span className="badge" style={{ backgroundColor: 'rgba(13, 148, 136, 0.2)', color: 'var(--primary-teal-hover)' }}>
+
+          <span className="badge" style={{ backgroundColor: 'rgba(6, 182, 212, 0.15)', color: 'var(--cyan-bright)', border: '1px solid var(--cyan-primary)' }}>
             Weighted Defensive Posture
           </span>
         </div>
@@ -105,7 +165,7 @@ export default function Dashboard({ assessmentData, setAssessmentData, setActive
 
       {/* 5 Categories Grid */}
       <div className="categories-section">
-        <h2 className="section-heading">Ransomware Readiness Categories</h2>
+        <h2 className="section-heading">🛡️ Ransomware Readiness Categories</h2>
         <div className="categories-grid">
           {Object.entries(assessmentData.category_scores || {}).map(([catName, score]) => (
             <CategoryCard 

@@ -7,9 +7,16 @@ export default function Navbar({ activeScreen, setActiveScreen }) {
         <div className="nav-brand">
           <span className="nav-icon">🛡️</span>
           <div>
-            <div className="nav-title">RansomGuard 360</div>
-            <div className="nav-subtitle">SIH1452 Prototype</div>
+            <div className="nav-title">
+              RansomGuard <span className="nav-title-highlight">360</span>
+            </div>
+            <div className="nav-subtitle">SIH 2026 • Ransomware Readiness Platform</div>
           </div>
+        </div>
+
+        <div className="system-status-badge">
+          <span className="pulse-dot"></span>
+          <span>SOC API ONLINE</span>
         </div>
 
         <nav className="nav-links">
@@ -17,19 +24,19 @@ export default function Navbar({ activeScreen, setActiveScreen }) {
             className={`nav-button ${activeScreen === 'dashboard' ? 'active' : ''}`}
             onClick={() => setActiveScreen('dashboard')}
           >
-            📊 Dashboard
+            📊 Security Dashboard
           </button>
           <button
             className={`nav-button ${activeScreen === 'assessment' ? 'active' : ''}`}
             onClick={() => setActiveScreen('assessment')}
           >
-            📝 Risk Assessment
+            📝 Readiness Console
           </button>
           <button
             className={`nav-button ${activeScreen === 'simulation' ? 'active' : ''}`}
             onClick={() => setActiveScreen('simulation')}
           >
-            ⚡ What-if Simulation
+            ⚡ Attack Simulation
           </button>
         </nav>
       </div>

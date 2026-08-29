@@ -1,33 +1,39 @@
 /* ==========================================================================
-   SIH1452 - Modern Plain CSS Design System
-   Color Palette: Sleek Dark Cyber-Security Theme (Navy/Teal/Crimson)
+   SIH1452 - Professional Cybersecurity / SOC Design System
+   Theme: High-Tech Cyber Console (Deep Slate / Cyan / Neon Accents)
    ========================================================================== */
 
 :root {
   --font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   
-  /* Color Tokens */
-  --bg-primary: #0f172a;       /* Dark slate background */
-  --bg-surface: #1e293b;       /* Card background */
-  --bg-surface-hover: #334155; /* Hover card background */
+  /* Deep Dark Theme Tokens */
+  --bg-primary: #080c14;       /* Deep slate background */
+  --bg-surface: #0f172a;       /* Elevated card background */
+  --bg-surface-hover: #1e293b; /* Hover surface background */
+  --bg-card-header: #1e293b;   /* Card header fill */
   
-  --text-main: #f8fafc;        /* Off-white primary text */
+  --text-main: #f8fafc;        /* High-contrast primary text */
   --text-muted: #94a3b8;       /* Slate muted text */
   --text-dim: #64748b;         /* Dim label text */
   
-  --primary-teal: #0d9488;     /* Core teal accent */
-  --primary-teal-hover: #14b8a6;
-  --accent-blue: #3b82f6;      /* Vibrant blue */
+  /* Cyber Accent Colors */
+  --cyan-bright: #38bdf8;      /* Bright cyan highlight */
+  --cyan-primary: #06b6d4;     /* Core cyan */
+  --cyan-glow: rgba(6, 182, 212, 0.25);
+  --teal-accent: #14b8a6;      /* Defensive teal */
+  --blue-accent: #3b82f6;      /* Infrastructure blue */
   
-  /* Risk Severity Colors */
-  --risk-low: #10b981;         /* Green */
-  --risk-moderate: #f59e0b;    /* Amber / Yellow */
-  --risk-high: #ef4444;        /* Red / Crimson */
+  /* Risk Status Colors */
+  --risk-low: #10b981;         /* Secure / Low Risk (Emerald) */
+  --risk-moderate: #f59e0b;    /* Warning / Moderate (Amber) */
+  --risk-high: #ef4444;        /* Critical / High Risk (Crimson) */
   
   /* Borders & Shadows */
-  --border-color: #334155;
-  --border-radius: 12px;
-  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  --border-color: rgba(56, 189, 248, 0.15);
+  --border-hover: rgba(56, 189, 248, 0.4);
+  --border-radius: 10px;
+  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  --glow-shadow: 0 0 15px rgba(6, 182, 212, 0.15);
   
   /* Transitions */
   --transition-fast: 0.2s ease-in-out;
@@ -42,13 +48,19 @@
 body {
   font-family: var(--font-family);
   background-color: var(--bg-primary);
+  /* Technical Grid Background Pattern */
+  background-image: 
+    linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-position: -1px -1px;
   color: var(--text-main);
   line-height: 1.6;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
 }
 
-/* App Container */
+/* App Layout Container */
 .app-container {
   display: flex;
   flex-direction: column;
@@ -57,7 +69,7 @@ body {
 
 .main-content {
   flex: 1;
-  max-width: 1280px;
+  max-width: 1320px;
   width: 100%;
   margin: 0 auto;
   padding: 2rem 1.5rem;
@@ -65,17 +77,18 @@ body {
 
 /* Navigation Header */
 .navbar {
-  background-color: var(--bg-surface);
+  background-color: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border-color);
-  padding: 1rem 1.5rem;
+  padding: 0.85rem 1.5rem;
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
 .navbar-inner {
-  max-width: 1280px;
+  max-width: 1320px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -85,31 +98,71 @@ body {
 .nav-brand {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.85rem;
 }
 
 .nav-icon {
-  font-size: 1.75rem;
+  font-size: 1.8rem;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.2) 0%, transparent 70%);
+  padding: 0.25rem;
+  border-radius: 8px;
 }
 
 .nav-title {
-  font-size: 1.25rem;
-  font-weight: 700;
+  font-size: 1.2rem;
+  font-weight: 800;
   color: var(--text-main);
   letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-title-highlight {
+  color: var(--cyan-bright);
 }
 
 .nav-subtitle {
-  font-size: 0.75rem;
-  color: var(--primary-teal-hover);
-  font-weight: 600;
+  font-size: 0.72rem;
+  color: var(--cyan-bright);
+  font-weight: 700;
   text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* System Online Status Indicator */
+.system-status-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background-color: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  color: var(--risk-low);
+  font-weight: 700;
   letter-spacing: 0.05em;
+}
+
+.pulse-dot {
+  width: 7px;
+  height: 7px;
+  background-color: var(--risk-low);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--risk-low);
+  animation: pulse-glow 2s infinite;
+}
+
+@keyframes pulse-glow {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
 }
 
 .nav-links {
   display: flex;
-  gap: 0.75rem;
+  gap: 0.6rem;
 }
 
 .nav-button {
@@ -118,26 +171,32 @@ body {
   border: 1px solid transparent;
   padding: 0.6rem 1.1rem;
   border-radius: 8px;
-  font-weight: 500;
-  font-size: 0.9rem;
+  font-weight: 600;
+  font-size: 0.88rem;
   cursor: pointer;
   transition: var(--transition-fast);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
 .nav-button:hover {
   color: var(--text-main);
-  background-color: var(--bg-surface-hover);
+  background-color: rgba(56, 189, 248, 0.08);
+  border-color: rgba(56, 189, 248, 0.2);
 }
 
 .nav-button.active {
   color: #ffffff;
-  background-color: var(--primary-teal);
-  font-weight: 600;
+  background-color: rgba(6, 182, 212, 0.15);
+  border-color: var(--cyan-primary);
+  box-shadow: 0 0 12px rgba(6, 182, 212, 0.25);
+  font-weight: 700;
 }
 
 /* DEMO Data Banner */
 .demo-banner {
-  background-color: rgba(245, 158, 11, 0.15);
+  background: linear-gradient(90deg, rgba(245, 158, 11, 0.15) 0%, rgba(245, 158, 11, 0.05) 100%);
   border: 1px solid var(--risk-moderate);
   border-radius: var(--border-radius);
   padding: 0.85rem 1.25rem;
@@ -146,7 +205,8 @@ body {
   align-items: center;
   gap: 0.75rem;
   color: #fef08a;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
+  box-shadow: var(--glow-shadow);
 }
 
 .demo-banner-icon {
@@ -156,104 +216,147 @@ body {
 .demo-banner-tag {
   background-color: var(--risk-moderate);
   color: #000;
-  font-weight: 700;
-  font-size: 0.7rem;
+  font-weight: 800;
+  font-size: 0.68rem;
   padding: 0.2rem 0.5rem;
   border-radius: 4px;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
 }
 
-/* Common Card Styles */
+/* Cyber Cards */
 .card {
   background-color: var(--bg-surface);
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
   padding: 1.5rem;
   box-shadow: var(--card-shadow);
+  transition: var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--cyan-primary), transparent);
+  opacity: 0.6;
+}
+
+.card:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--card-shadow), var(--glow-shadow);
 }
 
 .card-title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 1.1rem;
   color: var(--text-main);
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  letter-spacing: -0.01em;
 }
 
 /* Badges */
 .badge {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
   padding: 0.25rem 0.75rem;
   border-radius: 9999px;
-  font-size: 0.8rem;
-  font-weight: 700;
+  font-size: 0.78rem;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
 }
 
 .badge-low {
-  background-color: rgba(16, 185, 129, 0.2);
+  background-color: rgba(16, 185, 129, 0.15);
   color: var(--risk-low);
   border: 1px solid var(--risk-low);
 }
 
 .badge-moderate {
-  background-color: rgba(245, 158, 11, 0.2);
+  background-color: rgba(245, 158, 11, 0.15);
   color: var(--risk-moderate);
   border: 1px solid var(--risk-moderate);
 }
 
 .badge-high {
-  background-color: rgba(239, 68, 68, 0.2);
+  background-color: rgba(239, 68, 68, 0.15);
   color: var(--risk-high);
   border: 1px solid var(--risk-high);
 }
 
 /* Buttons */
 .btn-primary {
-  background-color: var(--primary-teal);
+  background: linear-gradient(135deg, var(--cyan-primary) 0%, #0891b2 100%);
   color: #ffffff;
-  border: none;
+  border: 1px solid var(--cyan-bright);
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
-  font-weight: 600;
-  font-size: 0.95rem;
+  font-weight: 700;
+  font-size: 0.92rem;
   cursor: pointer;
   transition: var(--transition-fast);
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);
 }
 
 .btn-primary:hover {
-  background-color: var(--primary-teal-hover);
+  box-shadow: 0 6px 18px rgba(6, 182, 212, 0.45);
+  transform: translateY(-1px);
 }
 
 .btn-secondary {
-  background-color: transparent;
+  background-color: rgba(30, 41, 59, 0.8);
   color: var(--text-main);
   border: 1px solid var(--border-color);
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   cursor: pointer;
   transition: var(--transition-fast);
 }
 
 .btn-secondary:hover {
   background-color: var(--bg-surface-hover);
+  border-color: var(--border-hover);
+  color: #ffffff;
+}
+
+/* Progress Bars */
+.progress-bar-bg {
+  width: 100%;
+  height: 8px;
+  background-color: #1e293b;
+  border-radius: 9999px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Footer */
 .footer {
   text-align: center;
   padding: 1.5rem;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   color: var(--text-dim);
   border-top: 1px solid var(--border-color);
   margin-top: 3rem;
+  background-color: rgba(15, 23, 42, 0.5);
 }

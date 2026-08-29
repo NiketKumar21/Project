@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from typing import List
 from app.data_manager import get_questions, get_scenarios, get_assessment_result, save_assessment_result
-from app.scoring_engine import calculate_assessment_scores
+from app.scoring_engine import calculate_assessment_scores, simulate_scenario_risk
 
 app = FastAPI(
     title="SIH1452 - Interactive Ransomware Risk and Readiness Assessment Platform",
@@ -31,6 +31,10 @@ class AnswerItem(BaseModel):
 
 class AssessmentSubmission(BaseModel):
     answers: List[AnswerItem] = Field(..., description="List of 15 question answers")
+
+class SimulationRequest(BaseModel):
+    scenario_id: str = Field(..., description="ID of the selected scenario")
+    control_enabled: bool = Field(True, description="True for Restored control, False for Disabled control")
 
 # Initial Demo Data Constant for Reset Endpoint
 INITIAL_DEMO_RESULT = {
@@ -105,7 +109,6 @@ def submit_assessment(submission: AssessmentSubmission):
     expected_ids = {q["id"] for q in questions}
     submitted_ids = {ans.question_id for ans in submission.answers}
 
-    # Validation: Ensure all 15 questions are answered
     if len(submitted_ids) < len(expected_ids) or submitted_ids != expected_ids:
         missing = expected_ids - submitted_ids
         raise HTTPException(
@@ -113,15 +116,9 @@ def submit_assessment(submission: AssessmentSubmission):
             detail=f"Incomplete assessment. Please answer all 15 questions. Missing question IDs: {sorted(list(missing))}"
         )
 
-    # Convert Pydantic objects to dicts for scoring engine
     raw_answers = [{"question_id": a.question_id, "selected_option_index": a.selected_option_index} for a in submission.answers]
-    
-    # Calculate scores via Centralized Scoring Engine
     result = calculate_assessment_scores(raw_answers)
-    
-    # Save result to JSON data file
     save_assessment_result(result)
-    
     return result
 
 @app.post("/api/assessment/reset")
@@ -129,3 +126,12 @@ def reset_assessment():
     """Reset assessment data back to sample initial DEMO data."""
     save_assessment_result(INITIAL_DEMO_RESULT)
     return INITIAL_DEMO_RESULT
+
+@app.post("/api/simulate")
+def run_simulation(req: SimulationRequest):
+    """
+    Execute Phase 3 What-If Attack Simulation.
+    Calculates baseline-relative risk score change when control is Disabled vs Restored.
+    """
+    base_assessment = get_assessment_result()
+    return simulate_scenario_risk(req.scenario_id, req.control_enabled, base_assessment)

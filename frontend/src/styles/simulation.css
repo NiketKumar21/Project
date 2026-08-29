@@ -1,5 +1,5 @@
 /* ==========================================================================
-   What-If Simulation Sandbox Styles (Screen 3)
+   What-If Threat Simulation Console Styles (Screen 3)
    ========================================================================== */
 
 .simulation-header {
@@ -7,10 +7,11 @@
 }
 
 .simulation-title {
-  font-size: 1.8rem;
+  font-size: 1.9rem;
   font-weight: 800;
   color: var(--text-main);
   margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
 }
 
 .simulation-subtitle {
@@ -20,11 +21,11 @@
 
 .simulation-grid {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
+  grid-template-columns: 1fr 1.35fr;
   gap: 1.5rem;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 980px) {
   .simulation-grid {
     grid-template-columns: 1fr;
   }
@@ -36,125 +37,245 @@
 
 .scenario-select {
   width: 100%;
-  padding: 0.75rem 1rem;
-  background-color: #0f172a;
+  padding: 0.85rem 1rem;
+  background-color: #080c14;
   color: var(--text-main);
   border: 1px solid var(--border-color);
   border-radius: 8px;
   font-size: 0.95rem;
   font-family: inherit;
   cursor: pointer;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
-.controls-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+.scenario-select:focus {
+  border-color: var(--cyan-bright);
+  box-shadow: 0 0 12px rgba(6, 182, 212, 0.25);
+  outline: none;
+}
+
+/* Control Status Toggle Buttons */
+.control-toggle-container {
+  background-color: #080c14;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.2rem;
   margin-top: 1rem;
 }
 
-.control-item {
+.toggle-group {
   display: flex;
-  align-items: flex-start;
   gap: 0.75rem;
-  padding: 1rem;
-  background-color: rgba(15, 23, 42, 0.6);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
+  margin-top: 0.85rem;
 }
 
-.control-item:hover {
-  border-color: var(--primary-teal);
-}
-
-.control-checkbox {
-  accent-color: var(--primary-teal);
-  width: 20px;
-  height: 20px;
-  margin-top: 2px;
-  cursor: pointer;
-}
-
-.control-details {
+.toggle-btn {
   flex: 1;
+  padding: 0.85rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-surface);
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  text-align: center;
 }
 
-.control-title {
-  font-size: 0.9rem;
-  font-weight: 600;
-  margin-bottom: 0.25rem;
+.toggle-btn:hover {
+  background-color: var(--bg-surface-hover);
 }
 
-.control-meta {
-  font-size: 0.75rem;
-  color: var(--primary-teal-hover);
-  font-weight: 600;
+.toggle-btn.active-disabled {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: var(--risk-high);
+  border-color: var(--risk-high);
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.25);
 }
 
-/* Simulation Results Panel */
+.toggle-btn.active-restored {
+  background-color: rgba(16, 185, 129, 0.2);
+  color: var(--risk-low);
+  border-color: var(--risk-low);
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.25);
+}
+
+/* Comparison Metric Cards */
 .comparison-box {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1.15fr;
   gap: 1rem;
   text-align: center;
   margin-bottom: 1.5rem;
 }
 
 .comparison-card {
-  background-color: #0f172a;
+  background-color: #080c14;
   border: 1px solid var(--border-color);
   border-radius: 8px;
-  padding: 1rem;
+  padding: 1.1rem;
 }
 
 .comparison-label {
   font-size: 0.75rem;
   color: var(--text-muted);
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: 0.06em;
 }
 
 .comparison-value {
-  font-size: 1.8rem;
-  font-weight: 800;
+  font-size: 1.9rem;
+  font-weight: 900;
   margin-top: 0.25rem;
+  letter-spacing: -0.02em;
 }
 
+/* High-Level 5-Stage Conceptual Attack Path Pipeline */
+.attack-path-section {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.attack-path-heading {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.attack-path-pipeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  position: relative;
+}
+
+.attack-stage-card {
+  background-color: #080c14;
+  border-left: 4px solid var(--blue-accent);
+  border-radius: 6px;
+  padding: 0.9rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--blue-accent);
+  transition: var(--transition-fast);
+}
+
+.attack-stage-card.disabled-stage {
+  border-left-color: var(--risk-high);
+}
+
+.attack-stage-card.disabled-stage:hover {
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.2);
+}
+
+.attack-stage-card.restored-stage {
+  border-left-color: var(--risk-low);
+}
+
+.attack-stage-card.restored-stage:hover {
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.2);
+}
+
+.attack-stage-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+
+.attack-stage-tag {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--cyan-bright);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.attack-stage-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.attack-stage-desc {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 0.15rem;
+}
+
+/* Simulated Business Impact Box */
 .impact-demo-box {
-  background-color: rgba(59, 130, 246, 0.1);
-  border: 1px dashed var(--accent-blue);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.12) 0%, rgba(6, 182, 212, 0.05) 100%);
+  border: 1px dashed var(--blue-accent);
   border-radius: 8px;
-  padding: 1rem;
+  padding: 1.2rem;
   margin-bottom: 1.5rem;
 }
 
 .impact-demo-header {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  color: var(--accent-blue);
-  font-weight: 700;
-  font-size: 0.85rem;
-  margin-bottom: 0.5rem;
+  justify-content: space-between;
+  color: var(--cyan-bright);
+  font-weight: 800;
+  font-size: 0.88rem;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+.impact-badge-tag {
+  background-color: var(--blue-accent);
+  color: #ffffff;
+  font-size: 0.65rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.impact-metric-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.88rem;
+  margin-bottom: 0.4rem;
+  color: var(--text-main);
+}
+
+/* Remediation Section */
+.remediation-section {
+  background-color: rgba(6, 182, 212, 0.08);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  border-radius: 8px;
+  padding: 1.2rem;
 }
 
 .remediation-list {
   list-style-type: none;
   padding-left: 0;
+  margin-top: 0.6rem;
 }
 
 .remediation-list li {
   position: relative;
   padding-left: 1.5rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
   font-size: 0.88rem;
   color: var(--text-main);
+  line-height: 1.4;
 }
 
 .remediation-list li::before {
   content: "✓";
   position: absolute;
   left: 0;
-  color: var(--primary-teal);
-  font-weight: 700;
+  color: var(--cyan-bright);
+  font-weight: 800;
 }

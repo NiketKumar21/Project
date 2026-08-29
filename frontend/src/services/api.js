@@ -98,3 +98,26 @@ export async function resetAssessment() {
     throw error;
   }
 }
+
+/**
+ * Execute Phase 3 Safe What-If Attack Simulation calculation
+ */
+export async function runSimulation(scenarioId, controlEnabled = true) {
+  try {
+    const response = await fetch(`${API_BASE_URL}/simulate`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        scenario_id: scenarioId,
+        control_enabled: controlEnabled
+      }),
+    });
+    if (!response.ok) throw new Error('Failed to execute simulation');
+    return await response.json();
+  } catch (error) {
+    console.error('API Error (runSimulation):', error);
+    throw error;
+  }
+}

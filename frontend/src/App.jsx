@@ -9,12 +9,23 @@ import './styles/main.css';
 export default function App() {
   const [activeScreen, setActiveScreen] = useState('dashboard');
   const [assessmentData, setAssessmentData] = useState(null);
+  const [loadingInitial, setLoadingInitial] = useState(true);
+  const [connectionError, setConnectionError] = useState(false);
+
+  const loadInitialData = async () => {
+    setLoadingInitial(true);
+    setConnectionError(false);
+    const data = await fetchAssessmentResult();
+    if (data) {
+      setAssessmentData(data);
+      setConnectionError(false);
+    } else {
+      setConnectionError(true);
+    }
+    setLoadingInitial(false);
+  };
 
   useEffect(() => {
-    async function loadInitialData() {
-      const data = await fetchAssessmentResult();
-      setAssessmentData(data);
-    }
     loadInitialData();
   }, []);
 
@@ -23,11 +34,42 @@ export default function App() {
       <Navbar activeScreen={activeScreen} setActiveScreen={setActiveScreen} />
 
       <main className="main-content">
+        {connectionError && (
+          <div style={{
+            backgroundColor: 'rgba(239, 68, 68, 0.15)',
+            border: '1px solid var(--risk-high)',
+            color: '#fca5a5',
+            padding: '1.2rem 1.5rem',
+            borderRadius: '8px',
+            marginBottom: '1.5rem',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            gap: '1rem'
+          }}>
+            <div>
+              <strong>⚠️ Backend Service Offline:</strong> Unable to connect to FastAPI backend at <code>http://localhost:8000</code>.
+              <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>
+                Please ensure the backend is running by executing: <code>python run.py</code> inside the <code>backend/</code> folder.
+              </div>
+            </div>
+            <button 
+              className="btn-secondary" 
+              onClick={loadInitialData}
+              style={{ fontSize: '0.82rem', padding: '0.4rem 0.8rem' }}
+            >
+              🔄 Retry Connection
+            </button>
+          </div>
+        )}
+
         {activeScreen === 'dashboard' && (
           <Dashboard 
             assessmentData={assessmentData} 
             setAssessmentData={setAssessmentData}
             setActiveScreen={setActiveScreen} 
+            loadingInitial={loadingInitial}
           />
         )}
 
@@ -47,7 +89,7 @@ export default function App() {
       </main>
 
       <footer className="footer">
-        SIH1452 — Interactive Ransomware Risk and Readiness Assessment Platform • Prototype Version 2.0 (Safe Deterministic Analytics Only)
+        SIH1452 — RansomGuard 360 • Ransomware Risk and Readiness Platform (SIH 2026 Prototype)
       </footer>
     </div>
   );
