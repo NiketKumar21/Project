@@ -1,4 +1,4 @@
-# RansomGuard 360 — Ransomware Risk & Readiness Assessment Platform
+# ThreatLens — Ransomware Risk & Readiness Assessment Platform
 
 > **Smart India Hackathon (SIH 2026) Prototype — Problem Statement SIH1452**  
 > An interactive cybersecurity risk assessment and threat simulation web platform that computes deterministic ransomware readiness scores, identifies organizational security vulnerabilities, and evaluates what-if attack scenarios.
@@ -7,7 +7,7 @@
 
 ## 📌 Executive Overview
 
-Ransomware remains one of the most critical cybersecurity threats facing modern organizations, educational institutions, and healthcare providers. **RansomGuard 360** (SIH1452) provides security leaders and IT administrators with a light-weight, explainable, and interactive platform to:
+Ransomware remains one of the most critical cybersecurity threats facing modern organizations, educational institutions, and healthcare providers. **ThreatLens** (SIH1452) provides security leaders and IT administrators with a light-weight, explainable, and interactive platform to:
 
 1. **Assess Defensive Readiness:** Evaluate 15 core security controls across 5 vital ransomware defense pillars.
 2. **Compute Deterministic Risk Metrics:** Calculate a mathematically explainable **Readiness Index (0–100%)** and **Ransomware Risk Score (0–100)** without unpredictable black-box algorithms.
@@ -101,30 +101,49 @@ npm run dev
 
 ---
 
+## 🌐 Production Cloud Deployment
+
+### 1-Click Deployment with Render Blueprint
+This repository includes a `render.yaml` blueprint for automatic 1-click deployment of both the Python FastAPI backend and React Vite frontend.
+
+1. Log in to [Render Dashboard](https://dashboard.render.com).
+2. Click **New +** -> **Blueprint**.
+3. Connect your GitHub repository `NiketKumar21/Project`.
+4. Render will automatically detect `render.yaml` and provision:
+   - **`threatlens-backend`** (Python Web Service running `uvicorn app.main:app`)
+   - **`threatlens-frontend`** (Static Web Site running `npm run build`)
+5. Configure environment variables:
+   - **`VITE_API_URL`**: Set on `threatlens-frontend` pointing to your deployed backend API URL (e.g. `https://threatlens-backend.onrender.com`).
+   - **`CORS_ORIGINS`**: Set on `threatlens-backend` (defaults to `*` for public access).
+
+---
+
 ## 📁 Project Structure
 
 ```
 Project/
 ├── backend/
 │   ├── app/
-│   │   ├── main.py             # FastAPI API endpoints & CORS config
+│   │   ├── main.py             # FastAPI API endpoints & dynamic CORS config
 │   │   ├── scoring_engine.py   # Deterministic math engine & simulation logic
 │   │   └── data_manager.py     # JSON file I/O operations
 │   ├── data/
 │   │   ├── questions.json      # 15 assessment questions
 │   │   ├── scenarios.json      # 6 simulation scenarios
 │   │   └── assessment_result.json # Persistent assessment result
+│   ├── Procfile                # Production start command for PaaS cloud platforms
 │   ├── requirements.txt
-│   └── run.py                  # Backend entry point
+│   └── run.py                  # Local backend entry point
 ├── frontend/
 │   ├── src/
 │   │   ├── components/         # Reusable UI components (ScoreGauge, CategoryCard, etc.)
 │   │   ├── pages/              # Pages (Dashboard, Assessment, Simulation)
-│   │   ├── services/api.js     # API client helpers
+│   │   ├── services/api.js     # API client helpers with dynamic VITE_API_URL
 │   │   ├── styles/             # Cyber SOC CSS stylesheets
 │   │   ├── App.jsx             # Main application shell
 │   │   └── main.jsx
 │   └── package.json
+├── render.yaml                 # Render Infrastructure-as-Code Blueprint
 └── README.md
 ```
 

@@ -1,6 +1,14 @@
-// API Service for SIH1452 Backend Communication
+// Dynamic API URL from environment variable (VITE_API_URL) with localhost fallback
+const getApiBaseUrl = () => {
+  const envUrl = import.meta.env.VITE_API_URL;
+  if (envUrl && envUrl.trim() !== '') {
+    const cleaned = envUrl.trim().replace(/\/$/, '');
+    return cleaned.endsWith('/api') ? cleaned : `${cleaned}/api`;
+  }
+  return 'http://localhost:8000/api';
+};
 
-const API_BASE_URL = 'http://localhost:8000/api';
+export const API_BASE_URL = getApiBaseUrl();
 
 /**
  * Fetch health check status

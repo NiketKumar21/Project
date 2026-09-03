@@ -1,3 +1,4 @@
+import os
 from fastapi import FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
@@ -6,19 +7,24 @@ from app.data_manager import get_questions, get_scenarios, get_assessment_result
 from app.scoring_engine import calculate_assessment_scores, simulate_scenario_risk
 
 app = FastAPI(
-    title="SIH1452 - Interactive Ransomware Risk and Readiness Assessment Platform",
+    title="ThreatLens - Interactive Ransomware Risk and Readiness Assessment Platform",
     description="Backend API for Ransomware Risk Assessment & Safe Attack Simulation",
     version="1.0.0"
 )
 
-# Configure CORS to allow communication from React Vite frontend
+# Configure CORS to allow communication from React Vite frontend (local & production)
+raw_cors_origins = os.getenv("CORS_ORIGINS", "*")
+if raw_cors_origins == "*":
+    origins = ["*"]
+else:
+    origins = [origin.strip() for origin in raw_cors_origins.split(",") if origin.strip()]
+    for dev_origin in ["http://localhost:5173", "http://127.0.0.1:5173", "http://localhost:3000"]:
+        if dev_origin not in origins:
+            origins.append(dev_origin)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-        "http://localhost:3000"
-    ],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

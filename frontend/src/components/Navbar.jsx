@@ -8,9 +8,9 @@ export default function Navbar({ activeScreen, setActiveScreen }) {
           <span className="nav-icon">🛡️</span>
           <div>
             <div className="nav-title">
-              RansomGuard <span className="nav-title-highlight">360</span>
+              Threat<span className="nav-title-highlight">Lens</span>
             </div>
-            <div className="nav-subtitle">SIH 2026 • Ransomware Readiness Platform</div>
+            <div className="nav-subtitle">See vulnerabilities before attackers do</div>
           </div>
         </div>
 

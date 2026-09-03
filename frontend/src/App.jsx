@@ -3,7 +3,7 @@ import Navbar from './components/Navbar';
 import Dashboard from './pages/Dashboard';
 import Assessment from './pages/Assessment';
 import Simulation from './pages/Simulation';
-import { fetchAssessmentResult } from './services/api';
+import { fetchAssessmentResult, API_BASE_URL } from './services/api';
 import './styles/main.css';
 
 export default function App() {
@@ -49,7 +49,7 @@ export default function App() {
             gap: '1rem'
           }}>
             <div>
-              <strong>⚠️ Backend Service Offline:</strong> Unable to connect to FastAPI backend at <code>http://localhost:8000</code>.
+              <strong>⚠️ Backend Service Offline:</strong> Unable to connect to FastAPI backend at <code>{API_BASE_URL}</code>.
               <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>
                 Please ensure the backend is running by executing: <code>python run.py</code> inside the <code>backend/</code> folder.
               </div>
@@ -89,7 +89,7 @@ export default function App() {
       </main>
 
       <footer className="footer">
-        SIH1452 — RansomGuard 360 • Ransomware Risk and Readiness Platform (SIH 2026 Prototype)
+        ThreatLens • See vulnerabilities before attackers do
       </footer>
     </div>
   );
